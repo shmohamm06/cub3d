@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 FRAMEWORKS = -framework OpenGL -framework AppKit
 LIB_DIR = libft
 MLX_DIR = mlx
-SRCS = cub3d.c
+SRCS = cub3d.c utils.c init.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(LIB_DIR)/libft.a $(MLX_DIR)/libmlx.a $(OBJS)
