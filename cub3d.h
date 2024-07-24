@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 19:40:30 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:51:54 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WINDOW_SIZE_Y 800
 # define PI 3.1415926535
 
-/*---------structs---------*/
+// structs
 enum
 {
 	NO_MOVE = 0,
@@ -119,7 +119,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	int			floor_color;
-	int			ceiling_color;
+	int			ceiling_col;
 	t_texture	texture_data;
 	void		*mlx_instance;
 	void		*window;
@@ -132,15 +132,36 @@ typedef struct s_game
 	t_tex_paths	texture_paths;
 	t_texture	textures[5];
 }				t_game;
-/*---------structs---------*/
 
+// utils
 int				args_check(int ac);
 float			to_radians(float n);
-void			init_data(t_game *cub3d);
-int				assign_map_coords(int fd, int *x, int *y);
-int				check_empty(t_game *cub3d);
-int				check_validity(t_game *cub3d);
 int				free_2d(char **s);
+int				free_texture_paths(t_game *cub3d);
 int				open_map(char *av);
+int				map_empty(t_game *cub3d);
+
+// init
+void			init_data(t_game *cub3d);
+
+// map
+int				read_map(char *map, int *x, int *y);
+int				map(char *map, t_game *cub3d);
+
+// parse map
+int				parse_map(int fd, t_game *cub3d, int size_x, int size_y);
+int				parse_map_header(t_game *cub3d, char **spl, bool *floor,
+					bool *ceiling);
+int				parse_header(int fd, t_game *cub3d, int flag);
+
+// map utils
+char			**remove_nl(char *line);
+int				load_texture(char **str, char **texture);
+int				assign_map_coords(int fd, int *x, int *y);
+int				ignore_header(int fd);
+int				check_contents(t_game *cub3d);
+
+// colours
+int				parse_colour(char *colour, int *hex_colour);
 
 #endif

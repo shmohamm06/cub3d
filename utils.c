@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:03:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 20:06:09 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:45:26 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ int	args_check(int ac)
 	return (0);
 }
 
+char	**remove_nl(char *line)
+{
+	char	**str;
+
+	str = ft_split(line, ' ');
+	if (str == NULL)
+		return (NULL);
+	if (str[0] != NULL && str[1] != NULL && ft_strlen(str[1]) >= 1
+		&& str[1][ft_strlen(str[1]) - 1] == '\n')
+		str[1][ft_strlen(str[1]) - 1] = '\0';
+	return (str);
+}
+
 int	free_2d(char **s)
 {
 	int	i;
@@ -43,7 +56,7 @@ int	free_2d(char **s)
 	return (0);
 }
 
-int	free_path_texture(t_game *cub3d)
+int	free_texture_paths(t_game *cub3d)
 {
 	if (cub3d->texture_paths.north != NULL)
 		free(cub3d->texture_paths.north);

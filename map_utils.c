@@ -5,12 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 19:23:41 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 19:26:24 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/07/22 20:02:20 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/07/24 12:46:18 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	open_map(char *av)
+{
+	int	fd;
+
+	fd = open(av, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error when opening map\n");
+		exit(1);
+	}
+	return (fd);
+}
+
+void	valid_path(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		free(path);
+		printf("Invalid texture path\n");
+		exit(1);
+	}
+}
+
+int	map_empty(t_game *cub3d)
+{
+	if (cub3d->map.blocks == NULL)
+		return (-1);
+	return (0);
+}
+
+int	ignore_header(int fd)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (i < 6)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			return (-1);
+		if (ft_strlen(line) > 1)
+			i++;
+	}
+	return (0);
+}
 
 int	assign_map_coords(int fd, int *x, int *y)
 {
@@ -34,39 +84,6 @@ int	assign_map_coords(int fd, int *x, int *y)
 		}
 		free(line);
 		line = get_next_line(fd);
-	}
-	return (0);
-}
-
-int	check_empty(t_game *cub3d)
-{
-	if (cub3d->map.blocks == NULL)
-		return (-1);
-	return (0);
-}
-
-int	check_validity(t_game *cub3d)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (cub3d->map.blocks[i] != NULL)
-	{
-		j = 0;
-		while (cub3d->map.blocks[i][j] != '\0')
-		{
-			if (cub3d->map.blocks[i][j] != '0' &&
-				cub3d->map.blocks[i][j] != ' ' &&
-				cub3d->map.blocks[i][j] != '1' &&
-				cub3d->map.blocks[i][j] != 'N' &&
-				cub3d->map.blocks[i][j] != 'S' &&
-				cub3d->map.blocks[i][j] != 'W' &&
-				cub3d->map.blocks[i][j] != 'E')
-				return (-1);
-			j++;
-		}
-		i++;
 	}
 	return (0);
 }

@@ -5,41 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 19:10:35 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 19:56:30 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/07/22 19:23:41 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/07/24 12:52:32 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	read_map(char *map, int *x, int *y)
+int	load_texture(char **str, char **texture)
 {
-	int	ret;
-	int	fd;
-
-	fd = open_map(map);
-	if (fd == -1)
-	{
-		printf("Cannot open the map %s\n", map);
+	if (*texture != NULL)
 		return (-1);
-	}
-	if (ignore_header(fd) == -1)
-		return (-1);
-	*x = 0;
-	*y = 0;
-	ret = assign_map_coords(fd, x, y);
-	close(fd);
-	return (ret);
+	*texture = ft_strdup(str[1]);
+	return (0);
 }
 
-int	check_map(char *map, t_game *cub3d)
+int	check_contents(t_game *cub3d)
 {
-	int	fd;
-	int	parser;
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	if (read_map(map, &x, &y) == -1)
-		return (-1);
-	fd = open_map(map);
+	i = 0;
+	while (cub3d->map.blocks[i] != NULL)
+	{
+		j = 0;
+		while (cub3d->map.blocks[i][j] != '\0')
+		{
+			if (cub3d->map.blocks[i][j] != '0' &&
+				cub3d->map.blocks[i][j] != ' ' &&
+				cub3d->map.blocks[i][j] != '1' &&
+				cub3d->map.blocks[i][j] != 'N' &&
+				cub3d->map.blocks[i][j] != 'S' &&
+				cub3d->map.blocks[i][j] != 'W' &&
+				cub3d->map.blocks[i][j] != 'E')
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	check_map(t_game *cub3d)
+{
+	if (map_empty(cub3d) == -1)
+	{
+		printf("Map is empty\n");
+		exit(1);
+	}
+	if (check_contents(cub3d) == -1)
+	{
+		printf("Invalid Map\n");
+		exit(1);
+	}
+	if (check_maps_sides(cub3d) == -1)
+	{
+		printf("Map sides are wrong\n");
+		exit(1);
+	}
+	if (check_map_cont(cub3d) == -1)
+		exit(1);
 }

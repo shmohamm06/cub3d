@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 19:42:08 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:05:30 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	main(int ac, char **av)
 
 	args_check(ac);
 	init_data(&cub3d);
-	
+	map(av[1], &cub3d);
 }
