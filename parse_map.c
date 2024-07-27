@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:45:29 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/24 12:13:08 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:42:19 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parse_map(int fd, t_game *cub3d, int size_x, int size_y)
 	if (cub3d->map.blocks == NULL)
 		return (-1);
 	cub3d->map.block_size = 1;
-	return (fill_map_blocks(fd, cub3d, size_x, 0));
+	return (fill_map(fd, cub3d, size_x, 0));
 }
 
 int	parse_map_header(t_game *cub3d, char **spl, bool *floor, bool *ceiling)

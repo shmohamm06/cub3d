@@ -6,11 +6,40 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:14:04 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/24 12:49:20 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:18:45 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	player_direction(t_game *cub3d, int size_x, int size_y,
+		int player_pos)
+{
+	while (size_x < cub3d->map.y)
+	{
+		size_x = 0;
+		while (size_x < cub3d->map.x)
+		{
+			if (cub3d->map.blocks[size_y][size_x] == 'N'
+				|| cub3d->map.blocks[size_y][size_x] == 'S'
+				|| cub3d->map.blocks[size_y][size_x] == 'W'
+				|| cub3d->map.blocks[size_y][size_x] == 'E')
+			{
+				player_pos++;
+				cub3d->player_initial_pos = cub3d->map.blocks[size_y][size_x];
+				cub3d->player.position.x_coord = size_x;
+				cub3d->player.position.y_coord = size_y;
+				if (player_pos > 1)
+					return (-1);
+			}
+			size_x++;
+		}
+		size_y++;
+	}
+	if (player_pos == 0)
+		return (-1);
+	return (0);
+}
 
 int	check_top_and_bottom(t_game *cub3d)
 {

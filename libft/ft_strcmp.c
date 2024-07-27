@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:28:19 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/07/27 17:34:59 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/07/27 17:35:09 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_game	cub3d;
+	int	i;
 
-	args_check(ac);
-	init_data(&cub3d);
-	map(av[1], &cub3d);
+	i = 0;
+	while (s2[i] != '\0' && s1[i] == s2[i])
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }

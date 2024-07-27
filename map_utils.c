@@ -6,26 +6,13 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:02:20 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/24 12:46:18 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:42:31 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	open_map(char *av)
-{
-	int	fd;
-
-	fd = open(av, O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error when opening map\n");
-		exit(1);
-	}
-	return (fd);
-}
-
-void	valid_path(char *path)
+int	valid_file_path(char *path)
 {
 	int	fd;
 
@@ -33,15 +20,9 @@ void	valid_path(char *path)
 	if (fd < 0)
 	{
 		free(path);
-		printf("Invalid texture path\n");
-		exit(1);
-	}
-}
-
-int	map_empty(t_game *cub3d)
-{
-	if (cub3d->map.blocks == NULL)
+		printf("Invalid file path\n");
 		return (-1);
+	}
 	return (0);
 }
 
@@ -85,5 +66,61 @@ int	assign_map_coords(int fd, int *x, int *y)
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (0);
+}
+
+int	fill_line(char **line, int size, char c)
+{
+	int		len;
+	char	*filled_line;
+	int		i;
+
+	len = ft_strlen(*line);
+	if (len >= size)
+		return (0);
+	filled_line = malloc(size + 1);
+	if (filled_line == NULL)
+		return (-1);
+	i = 0;
+	while (i < len)
+	{
+		filled_line[i] = (*line)[i];
+		i++;
+	}
+	while (i < size)
+	{
+		filled_line[i] = c;
+		i++;
+	}
+	filled_line[i] = '\0';
+	*line = filled_line;
+	return (0);
+}
+
+int	fill_map(int fd, t_game *cub3d, int size_x, int i)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		if (ft_strcmp(line, "\n") != 0)
+		{
+			if (ft_strlen(line) > 0)
+				line[ft_strlen(line) - 1] = '\0';
+			if (fill_line(&line, size_x, ' ') == -1)
+			{
+				free(line);
+				free_2d(cub3d->map.blocks);
+				return (-1);
+			}
+			cub3d->map.blocks[i] = line;
+			i++;
+		}
+		else
+			free(line);
+		line = get_next_line(fd);
+	}
+	cub3d->map.blocks[i] = NULL;
 	return (0);
 }

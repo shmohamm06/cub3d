@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/24 12:51:54 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:46:10 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ typedef struct s_gamer
 
 typedef struct s_texture
 {
-	void		*texture_img;
-	char		*texture_addr;
-	int			bpp;
-	int			line_size;
-	int			byte_order;
+	void		*img;
+	char		*address;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
 	int			img_width;
 	int			img_height;
 	int			texture_y;
@@ -136,10 +136,13 @@ typedef struct s_game
 // utils
 int				args_check(int ac);
 float			to_radians(float n);
+char			**remove_nl(char *line);
 int				free_2d(char **s);
 int				free_texture_paths(t_game *cub3d);
-int				open_map(char *av);
-int				map_empty(t_game *cub3d);
+
+// utils_2
+void			check_and_exit(int condition, const char *message,
+					int exit_code);
 
 // init
 void			init_data(t_game *cub3d);
@@ -154,12 +157,35 @@ int				parse_map_header(t_game *cub3d, char **spl, bool *floor,
 					bool *ceiling);
 int				parse_header(int fd, t_game *cub3d, int flag);
 
-// map utils
-char			**remove_nl(char *line);
-int				load_texture(char **str, char **texture);
-int				assign_map_coords(int fd, int *x, int *y);
-int				ignore_header(int fd);
+// check_map
+int				map_empty(t_game *cub3d);
 int				check_contents(t_game *cub3d);
+int				check_map(t_game *cub3d);
+
+// check_map 2
+int				player_direction(t_game *cub3d, int size_x, int size_y,
+					int player_pos);
+int				check_top_and_bottom(t_game *cub3d);
+int				check_horizontal(t_game *cub3d);
+int				check_vertical(t_game *cub3d);
+int				check_maps_sides(t_game *cub3d);
+
+// check_map 3
+int				check_map_validity(t_game *cub3d, int y, int x);
+int				check_inside_map(t_game *cub3d);
+int				open_map(char *av);
+
+// check_files
+int				load_texture(char **str, char **texture);
+bool			check_file_type(char *str);
+bool			check_all_textures(t_game *cub3d);
+
+// map utils
+int				valid_file_path(char *path);
+int				ignore_header(int fd);
+int				fill_line(char **line, int size, char c);
+int				fill_map(int fd, t_game *cub3d, int size_x, int i);
+int				assign_map_coords(int fd, int *x, int *y);
 
 // colours
 int				parse_colour(char *colour, int *hex_colour);

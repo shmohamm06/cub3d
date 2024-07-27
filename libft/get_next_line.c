@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:54:27 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 13:43:00 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:33:03 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,4 @@ char	*get_next_line(int fd)
 	line = line_by_line(str);
 	str = del_line(str);
 	return (line);
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("get_next_line.c", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
 }

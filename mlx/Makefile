@@ -24,7 +24,6 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 	@ar -r -c $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo ""
 	@echo "$(GREEN)"
 	@echo "Created: $(words $(OBJ)) object file(s) for MLX"
 	@echo "Created: $(NAME)$(RESET)"
@@ -32,7 +31,6 @@ $(NAME):	$(OBJ)
 clean:
 	@rm -f $(NAME) $(OBJ) *~
 	@rm -f mlx_app
-	@echo ""
 	@echo "$(YELLOW)"
 	@echo "Removed: $(words $(OBJ)) object file(s) from MLX"
 	@echo "Removed: $(NAME)$(RESET)"

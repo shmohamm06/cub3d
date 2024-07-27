@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:28:19 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/07/22 15:03:49 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/07/27 17:28:32 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+void	check_and_exit(int condition, const char *message, int exit_code)
 {
-	t_game	cub3d;
-
-	args_check(ac);
-	init_data(&cub3d);
-	map(av[1], &cub3d);
+	if (condition == -1)
+	{
+		printf("%s\n", message);
+		exit(exit_code);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 08:31:44 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 13:44:03 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:36:19 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char *s1, char *s2);
+int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -79,5 +80,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 char				*line_by_line(char *s);
 char				*del_line(char *s);
 char				*read_line(char *str, int fd);
+char				*get_next_line(int fd);
 
 #endif
