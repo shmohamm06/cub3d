@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_maps2.c                                      :+:      :+:    :+:   */
+/*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:14:04 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:18:45 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:03:40 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	player_direction(t_game *cub3d, int size_x, int size_y,
 		int player_pos)
 {
-	while (size_x < cub3d->map.y)
+	while (size_y < cub3d->map.y)
 	{
 		size_x = 0;
 		while (size_x < cub3d->map.x)

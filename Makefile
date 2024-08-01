@@ -4,7 +4,7 @@ YELLOW      = \033[33m
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 FRAMEWORKS = -framework OpenGL -framework AppKit
 LIB_DIR = libft
 MLX_DIR = mlx

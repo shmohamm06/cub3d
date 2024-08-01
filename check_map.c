@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:23:41 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:44:35 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:01:57 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	check_contents(t_game *cub3d)
 int	check_map(t_game *cub3d)
 {
 	check_and_exit(map_empty(cub3d), "Map is empty\n", 1);
-	check_and_exit(check_contents(cub3d), "Invalid Contents in Map\n", 1);
+	check_and_exit(check_contents(cub3d), "Invalid Contents in Map", 1);
 	check_and_exit(check_maps_sides(cub3d), "Map sides are wrong\n", 1);
 	check_and_exit(player_direction(cub3d, 0, 0, 0),
-		"Invalid player position\n", 1);
+		"Invalid player position, can only be N, S, W, or E", 1);
 	check_and_exit(check_inside_map(cub3d), "Invalid Map structure\n", 1);
 	check_and_exit(check_all_textures(cub3d), "Invalid Map structure\n", 1);
 	return (0);
