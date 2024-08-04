@@ -5,6 +5,8 @@
     "__hash_table": "c",
     "functional": "c",
     "type_traits": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "draw_utils.C": "cpp",
+    "raycast_helper.C": "cpp"
   }
 }
