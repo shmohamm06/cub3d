@@ -9,9 +9,10 @@ FRAMEWORKS = -framework OpenGL -framework AppKit
 LIB_DIR = libft
 MLX_DIR = mlx
 
-SRCS = cub3d.c utils.c utils2.c parse_map.c map.c init.c \
+SRCS = cub3d.c raycast.c draw_wall.c utils.c utils2.c parse_map.c map.c init.c \
        map_utils.c colour.c check_map.c check_map2.c check_map3.c \
-       check_files.c key_moves.c key.c keyhandler.c raycast.c raycast_help.c ray_calculation.c
+       check_files.c key_moves.c key.c keyhandler.c raycast_help.c \
+	   ray_calculation.c utils_draw.c \
 
 OBJS = $(SRCS:.c=.o)
 

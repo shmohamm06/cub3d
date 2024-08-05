@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 12:39:35 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:27:47 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void			strafe_player_left(t_game *game);
 void			rotate_left(t_game *game);
 void			rotate_right(t_game *game);
 int				free_2d(char **array);
-void			render_scene(t_game *game);
+int				render_scene(t_game *game);
 
 //DRAWING BBGGGG
 void			calculate_wall_dimensions(t_game *game, t_ray_calc *ray_calc,
@@ -242,8 +242,9 @@ void			calculate_wall_distance(t_ray_calc *ray_calc);
 t_vector		calculate_ray_direction(t_gamer *player, float camera_plane_x);
 t_vector		calculate_delta_distance(t_vector *ray_direction);
 t_vector		calculate_step_direction(t_vector *ray_direction);
-t_vector		calculate_initial_side_distance(t_gamer *player,
-					t_vector *ray_direction, t_vector *grid_pos,
-					t_vector *delta_distance);
+t_vector	calculate_initial_side_distance(t_gamer *player,
+											t_vector *ray_direction,
+											t_vector *grid_pos,
+											t_vector *delta_distance);
 
 #endif

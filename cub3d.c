@@ -6,22 +6,23 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 10:45:24 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:23:12 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_scene(t_game *game)
+int	render_scene(t_game *game)
 {
 	mlx_clear_window(game->mlx_instance, game->window);
 	setup_hooks(game);
 	clear_image(game);
 	draw_ceiling(game, game->ceiling_col);
 	draw_floor(game, game->floor_color);
-	raycast(game, game->textures);
+	// raycast(game, game->textures);
 	mlx_put_image_to_window(game->mlx_instance, game->window,
-		game->texture_data.img, 0, 0);
+			game->texture_data.img, 0, 0);
+	return (0);
 }
 
 void	setup_hooks(t_game *game)
