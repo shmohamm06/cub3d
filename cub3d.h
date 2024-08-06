@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 14:27:47 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:51:50 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,19 +145,65 @@ typedef struct s_game
 # define SHOW_MAP 46
 # define ON_MOUSE_DW 4
 
-// utils
-int				args_check(int ac);
-float			to_radians(float n);
-char			**remove_nl(char *line);
-int				free_2d(char **s);
-int				free_texture_paths(t_game *cub3d);
+// cub3d
+int				render_scene(t_game *game);
+void			setup_hooks(t_game *game);
 
-// utils_2
-void			check_and_exit(int condition, const char *message,
-					int exit_code);
+// check_files
+bool			check_file_type(char *str);
+bool			check_all_textures(t_game *cub3d);
+int				valid_file_path(char *path);
+int				map_empty(t_game *cub3d);
+int				open_map(char *av);
+
+// check_map
+int				check_contents(t_game *cub3d);
+int				check_map(t_game *cub3d);
+int				check_map_validity(t_game *cub3d, int y, int x);
+int				check_inside_map(t_game *cub3d);
+
+// check_map 2
+int				player_direction(t_game *cub3d, int size_x, int size_y,
+					int player_pos);
+int				check_top_and_bottom(t_game *cub3d);
+int				check_horizontal(t_game *cub3d);
+int				check_vertical(t_game *cub3d);
+int				check_maps_sides(t_game *cub3d);
+
+// draw_wall
+void			calculate_wall_dimensions(t_game *game, t_ray_calc *ray_calc,
+					t_wall_draw *wall_draw, t_texture *texture);
+void			render_wall_slice(t_game *game, t_ray_calc *ray_calc,
+					t_texture *texture);
+void			select_texture(t_game *cub3d, t_ray_calc *ray_calc,
+					t_texture *texture);
 
 // init
 void			init_data(t_game *cub3d);
+
+// key_moves
+void			move_player_forward(t_game *game);
+void			move_player_backward(t_game *game);
+void			strafe_player_right(t_game *game);
+void			strafe_player_left(t_game *game);
+
+// key_rotation
+void			rotate_left(t_game *game);
+void			rotate_right(t_game *game);
+
+// key
+void			release_textures(t_game *game, t_texture *textures);
+int				terminate_game(t_game *game);
+int				update_movement(t_game *game);
+int				handle_key_press(int keycode, t_game *game);
+int				handle_key_release(int keycode, t_game *game);
+
+// map utils
+int				load_texture(char **str, char **texture);
+int				ignore_header(int fd);
+int				fill_line(char **line, int size, char c);
+int				fill_map(int fd, t_game *cub3d, int size_x, int i);
+int				assign_map_coords(int fd, int *x, int *y);
 
 // map
 int				read_map(char *map, int *x, int *y);
@@ -169,82 +215,42 @@ int				parse_map_header(t_game *cub3d, char **spl, bool *floor,
 					bool *ceiling);
 int				parse_header(int fd, t_game *cub3d, int flag);
 
-// check_map
-int				map_empty(t_game *cub3d);
-int				check_contents(t_game *cub3d);
-int				check_map(t_game *cub3d);
+// ray_calculation
+t_vector		calculate_ray_direction(t_gamer *player, float camera_plane_x);
+t_vector		calculate_delta_distance(t_vector *ray_direction);
+t_vector		calculate_step_direction(t_vector *ray_direction);
+t_vector		calculate_initial_side_distance(t_gamer *player,
+					t_vector *ray_direction,
+					t_vector *grid_pos,
+					t_vector *delta_distance);
 
-// check_map 2
-int				player_direction(t_game *cub3d, int size_x, int size_y,
-					int player_pos);
-int				check_top_and_bottom(t_game *cub3d);
-int				check_horizontal(t_game *cub3d);
-int				check_vertical(t_game *cub3d);
-int				check_maps_sides(t_game *cub3d);
+// raycast_help
+void			perform_dda(t_game *game, t_ray_calc *ray_calc);
+void			initialize_ray_calculation(t_game *game, int screen_x,
+					t_ray_calc *ray_calc);
+void			calculate_wall_distance(t_ray_calc *ray_calc);
 
-// check_map 3
-int				check_map_validity(t_game *cub3d, int y, int x);
-int				check_inside_map(t_game *cub3d);
-int				open_map(char *av);
+// raycast
+void			cast_single_ray(t_game *game, int screen_x);
+void			perform_raycasting(t_game *game);
 
-// check_files
-int				load_texture(char **str, char **texture);
-bool			check_file_type(char *str);
-bool			check_all_textures(t_game *cub3d);
-
-// map utils
-int				valid_file_path(char *path);
-int				ignore_header(int fd);
-int				fill_line(char **line, int size, char c);
-int				fill_map(int fd, t_game *cub3d, int size_x, int i);
-int				assign_map_coords(int fd, int *x, int *y);
-
-// colours
-int				parse_colour(char *colour, int *hex_colour);
-
-// KEYS AND STUFF RELATED TO IT LOLZ
-void			release_textures(t_game *game, t_texture *textures);
-int				terminate_game(t_game *game);
-int				update_movement(t_game *game);
-int				handle_key_press(int keycode, t_game *game);
-int				handle_key_release(int keycode, t_game *game);
-float			to_radians(float degrees);
-void			move_player_forward(t_game *game);
-void			move_player_backward(t_game *game);
-void			strafe_player_right(t_game *game);
-void			strafe_player_left(t_game *game);
-void			rotate_left(t_game *game);
-void			rotate_right(t_game *game);
-int				free_2d(char **array);
-int				render_scene(t_game *game);
-
-//DRAWING BBGGGG
-void			calculate_wall_dimensions(t_game *game, t_ray_calc *ray_calc,
-					t_wall_draw *wall_draw, t_texture *texture);
-void			render_wall_slice(t_game *game, t_ray_calc *ray_calc,
-					t_texture *texture);
+// utils_draw
 void			draw_pixel(t_texture *image_data, int x, int y, int color);
 void			draw_ceiling(t_game *game, int color);
 void			draw_floor(t_game *game, int color);
 void			clear_image(t_game *game);
 int				get_image_pixel(t_texture *texture, int x, int y);
-void			select_texture(t_game *game, t_ray_calc *ray_calc,
-					t_texture *texture);
-void			setup_hooks(t_game *game);
 
-//RAYINGGG BABABYYYYY
-void			cast_single_ray(t_game *game, int screen_x);
-void			perform_raycasting(t_game *game);
-void			perform_dda(t_game *game, t_ray_calc *ray_calc);
-void			initialize_ray_calculation(t_game *game, int screen_x,
-					t_ray_calc *ray_calc);
-void			calculate_wall_distance(t_ray_calc *ray_calc);
-t_vector		calculate_ray_direction(t_gamer *player, float camera_plane_x);
-t_vector		calculate_delta_distance(t_vector *ray_direction);
-t_vector		calculate_step_direction(t_vector *ray_direction);
-t_vector	calculate_initial_side_distance(t_gamer *player,
-											t_vector *ray_direction,
-											t_vector *grid_pos,
-											t_vector *delta_distance);
+// utils
+float			to_radians(float n);
+int				args_check(int ac);
+char			**remove_nl(char *line);
+int				free_2d(char **s);
+int				free_texture_paths(t_game *cub3d);
+
+// utils_2
+void			check_and_exit(int condition, const char *message,
+					int exit_code);
+int				parse_colour(char *colour, int *hex_colour);
 
 #endif

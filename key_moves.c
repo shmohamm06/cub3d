@@ -6,16 +6,11 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:52:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 11:06:20 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:38:21 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-float	to_radians(float degrees)
-{
-	return (degrees * (PI / 180.0f));
-}
 
 void	move_player_forward(t_game *game)
 {

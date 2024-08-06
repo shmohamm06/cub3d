@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:44:40 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:40:10 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:42:19 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,36 @@ bool	check_all_textures(t_game *cub3d)
 	return (true);
 }
 
-int	load_texture(char **str, char **texture)
+int	valid_file_path(char *path)
 {
-	if (*texture != NULL)
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		free(path);
+		printf("Invalid file path\n");
 		return (-1);
-	*texture = ft_strdup(str[1]);
+	}
 	return (0);
+}
+
+int	map_empty(t_game *cub3d)
+{
+	if (cub3d->map.blocks == NULL)
+		return (-1);
+	return (0);
+}
+
+int	open_map(char *av)
+{
+	int	fd;
+
+	fd = open(av, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error when opening map\n");
+		exit(1);
+	}
+	return (fd);
 }

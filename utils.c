@@ -6,11 +6,16 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:03:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 14:31:32 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:38:28 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+float	to_radians(float degrees)
+{
+	return (degrees * (PI / 180.0f));
+}
 
 int	args_check(int ac)
 {

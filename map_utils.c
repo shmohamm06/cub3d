@@ -6,23 +6,17 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:02:20 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:42:31 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:42:17 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	valid_file_path(char *path)
+int	load_texture(char **str, char **texture)
 {
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		free(path);
-		printf("Invalid file path\n");
+	if (*texture != NULL)
 		return (-1);
-	}
+	*texture = ft_strdup(str[1]);
 	return (0);
 }
 
