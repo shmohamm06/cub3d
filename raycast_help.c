@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:58:44 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 11:00:29 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:00:15 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	initialize_ray_calculation(t_game *game, int screen_x,
 		t_ray_calc *ray_calc)
 {
 	ray_calc->screen_x = screen_x;
-	ray_calc->camera_plane_x = 2 * screen_x / (float)WINDOW_SIZE_X - 1;
+	ray_calc->camera_plane_x = 2 * screen_x / (float)WIN_WIDTH - 1;
 	ray_calc->ray_dir = calculate_ray_direction(&game->player,
 			ray_calc->camera_plane_x);
 	ray_calc->delta_distance = calculate_delta_distance(&ray_calc->ray_dir);

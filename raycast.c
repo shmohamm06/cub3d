@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:00:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 14:29:37 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:57:00 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	perform_raycasting(t_game *game)
 	int	screen_x;
 
 	screen_x = 0;
-	while (screen_x < WINDOW_SIZE_X)
+	while (screen_x < WIN_WIDTH)
 	{
 		cast_single_ray(game, screen_x);
 		screen_x++;

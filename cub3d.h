@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/06 11:51:50 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:00:55 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WINDOW_SIZE_X 800
-# define WINDOW_SIZE_Y 800
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 1200
 # define PI 3.1415926535
 
 // structs
@@ -121,7 +121,7 @@ typedef struct s_game
 	int			floor_color;
 	int			ceiling_col;
 	t_texture	texture_data;
-	void		*mlx_instance;
+	void		*mlx;
 	void		*window;
 	char		**map_data;
 	bool		display_map;
@@ -235,7 +235,8 @@ void			cast_single_ray(t_game *game, int screen_x);
 void			perform_raycasting(t_game *game);
 
 // utils_draw
-void			draw_pixel(t_texture *image_data, int x, int y, int color);
+void			my_mlx_pixel_put(t_texture *image_data, int x,
+					int y, int color);
 void			draw_ceiling(t_game *game, int color);
 void			draw_floor(t_game *game, int color);
 void			clear_image(t_game *game);

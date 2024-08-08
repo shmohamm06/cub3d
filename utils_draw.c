@@ -6,13 +6,13 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:46:58 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 14:18:11 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:59:45 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_pixel(t_texture *image_data, int x, int y, int color)
+void	my_mlx_pixel_put(t_texture *image_data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -27,18 +27,18 @@ void	draw_ceiling(t_game *game, int color)
 	int	x;
 
 	y = 0;
-	while (y < WINDOW_SIZE_Y / 2)
+	while (y < WIN_HEIGHT / 2)
 	{
 		x = 0;
-		while (x < WINDOW_SIZE_X)
+		while (x < WIN_WIDTH)
 		{
-			draw_pixel(&game->texture_data, x, y, color);
+			my_mlx_pixel_put(&game->texture_data, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx_instance, game->window,
-		game->texture_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->texture_data.img, 0,
+		0);
 }
 
 void	draw_floor(t_game *game, int color)
@@ -46,19 +46,19 @@ void	draw_floor(t_game *game, int color)
 	int	y;
 	int	x;
 
-	y = WINDOW_SIZE_Y / 2;
-	while (y < WINDOW_SIZE_Y)
+	y = WIN_HEIGHT / 2;
+	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		while (x < WINDOW_SIZE_X)
+		while (x < WIN_WIDTH)
 		{
-			draw_pixel(&game->texture_data, x, y, color);
+			my_mlx_pixel_put(&game->texture_data, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx_instance, game->window,
-		game->texture_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->texture_data.img, 0,
+		0);
 }
 
 void	clear_image(t_game *game)
@@ -67,18 +67,18 @@ void	clear_image(t_game *game)
 	int	x;
 
 	y = 0;
-	while (y < WINDOW_SIZE_Y)
+	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		while (x < WINDOW_SIZE_X)
+		while (x < WIN_WIDTH)
 		{
-			draw_pixel(&game->texture_data, x, y, 0x000000);
+			my_mlx_pixel_put(&game->texture_data, x, y, 0x000000);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx_instance, game->window,
-		game->texture_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->texture_data.img, 0,
+		0);
 }
 
 int	get_image_pixel(t_texture *texture, int x, int y)

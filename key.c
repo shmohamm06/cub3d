@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:53:50 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 10:53:51 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:54:56 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	release_textures(t_game *game, t_texture *textures)
 {
 	if (textures[NORTH].img)
-		mlx_destroy_image(game->mlx_instance, textures[NORTH].img);
+		mlx_destroy_image(game->mlx, textures[NORTH].img);
 	if (textures[SOUTH].img)
-		mlx_destroy_image(game->mlx_instance, textures[SOUTH].img);
+		mlx_destroy_image(game->mlx, textures[SOUTH].img);
 	if (textures[WEST].img)
-		mlx_destroy_image(game->mlx_instance, textures[WEST].img);
+		mlx_destroy_image(game->mlx, textures[WEST].img);
 	if (textures[EAST].img)
-		mlx_destroy_image(game->mlx_instance, textures[EAST].img);
+		mlx_destroy_image(game->mlx, textures[EAST].img);
 }
 
 int	terminate_game(t_game *game)
@@ -31,8 +31,8 @@ int	terminate_game(t_game *game)
 	free_texture_paths(game);
 	release_textures(game, game->textures);
 	if (game->texture_data.img)
-		mlx_destroy_image(game->mlx_instance, game->texture_data.img);
-	mlx_destroy_window(game->mlx_instance, game->window);
+		mlx_destroy_image(game->mlx, game->texture_data.img);
+	mlx_destroy_window(game->mlx, game->window);
 	printf("Exiting game!\n");
 	exit(0);
 }
