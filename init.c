@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:45:08 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 16:21:36 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:34:24 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	begin_execution(t_game *cub3d)
 	check_player_direction(cub3d);
 	create_image(cub3d);
 	keys(cub3d);
+	init_tex(cub3d);
+	check_and_load_textures(cub3d);
+	// render_scene(cub3d);
 }
 
 void	create_image(t_game *cub3d)

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 16:16:09 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:26:03 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ int				handle_key_press(int keycode, t_game *game);
 int				handle_key_release(int keycode, t_game *game);
 
 // map utils
-int				load_texture(char **str, char **texture);
+int				save_texture_path(char **str, char **texture);
 int				ignore_header(int fd);
 int				fill_line(char **line, int size, char c);
 int				fill_map(int fd, t_game *cub3d, int size_x, int i);
@@ -236,6 +236,13 @@ void			calculate_wall_distance(t_ray_calc *ray_calc);
 // raycast
 void			cast_single_ray(t_game *game, int screen_x);
 void			perform_raycasting(t_game *game);
+
+// textures
+void			check_xpms(t_game *cub3d, t_texture *tex, char *texture_path);
+void			init_tex(t_game *cub3d);
+void			init_tex_values(t_texture *texture);
+void			fill_walls(t_game *cub3d, t_texture *tex, char *path);
+void			check_and_load_textures(t_game *cub3d);
 
 // utils_draw
 void			my_mlx_pixel_put(t_texture *image_data, int x,

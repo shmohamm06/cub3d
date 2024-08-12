@@ -6,13 +6,13 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:02:20 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/06 11:42:17 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:24:21 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	load_texture(char **str, char **texture)
+int	save_texture_path(char **str, char **texture)
 {
 	if (*texture != NULL)
 		return (-1);

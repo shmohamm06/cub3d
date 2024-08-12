@@ -12,7 +12,7 @@ MLX_DIR = mlx
 SRCS = cub3d.c raycast.c draw_wall.c utils.c utils2.c parse_map.c map.c \
        map_utils.c check_map.c check_map2.c init.c \
        check_files.c key_moves.c key.c key_rotation.c raycast_help.c \
-	   ray_calculation.c utils_draw.c \
+	   ray_calculation.c utils_draw.c textures.c \
 
 OBJS = $(SRCS:.c=.o)
 

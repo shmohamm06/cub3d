@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:45:29 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/27 17:42:19 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:24:21 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	parse_map(int fd, t_game *cub3d, int size_x, int size_y)
 int	parse_map_header(t_game *cub3d, char **spl, bool *floor, bool *ceiling)
 {
 	if (ft_strcmp(spl[0], "NO") == 0)
-		return (load_texture(spl, &cub3d->texture_paths.north));
+		return (save_texture_path(spl, &cub3d->texture_paths.north));
 	if (ft_strcmp(spl[0], "SO") == 0)
-		return (load_texture(spl, &cub3d->texture_paths.south));
+		return (save_texture_path(spl, &cub3d->texture_paths.south));
 	if (ft_strcmp(spl[0], "WE") == 0)
-		return (load_texture(spl, &cub3d->texture_paths.west));
+		return (save_texture_path(spl, &cub3d->texture_paths.west));
 	if (ft_strcmp(spl[0], "EA") == 0)
-		return (load_texture(spl, &cub3d->texture_paths.east));
+		return (save_texture_path(spl, &cub3d->texture_paths.east));
 	if (ft_strcmp(spl[0], "F") == 0)
 	{
 		if (*floor == true || parse_colour(spl[1], &cub3d->floor_color) == -1)
