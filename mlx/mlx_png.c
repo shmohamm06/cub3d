@@ -57,7 +57,7 @@ typedef struct png_info_s
   int		depth;
   int		color;
   int		interlace;
-  int		bpp;
+  int		bits_per_pixel;
 } png_info_t;
 
 
@@ -104,7 +104,7 @@ unsigned char (*(mipng_defilter[]))(unsigned char *buff, int pos, int a, int b, 
   mipng_defilter_paeth
 };
 
-// only work for mlx mac or img 32bpp
+// only work for mlx mac or img 32bits_per_pixel
 int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
 {
   unsigned int	current_filter;
@@ -117,9 +117,9 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
   unsigned char *ibuf;
 
   ibuf = (unsigned char *)img->buffer;
-  iline = img->width * UNIQ_BPP;
-  ilen = img->width * img->height * UNIQ_BPP;
-  blen = img->width * img->height * pi->bpp + img->height;
+  iline = img->width * UNIQ_bits_per_pixel;
+  ilen = img->width * img->height * UNIQ_bits_per_pixel;
+  blen = img->width * img->height * pi->bits_per_pixel + img->height;
   ipos = 0;
   bpos = 0;
   while (ipos < ilen && bpos < blen)
@@ -130,9 +130,9 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
 	    return (ERR_DATA_FILTER);
 	}
       ibuf[ipos] = mipng_defilter[current_filter](buf, bpos,
-				 ipos%iline>3?ibuf[ipos-UNIQ_BPP]:0,
+				 ipos%iline>3?ibuf[ipos-UNIQ_bits_per_pixel]:0,
 				 (ipos>=iline)?ibuf[ipos-iline]:0,
-				 (ipos>=iline && ipos%iline>3)?ibuf[ipos-iline-UNIQ_BPP]:0);
+				 (ipos>=iline && ipos%iline>3)?ibuf[ipos-iline-UNIQ_bits_per_pixel]:0);
       ipos ++;
       bpos ++;
       if (pi->depth == 16)
@@ -152,7 +152,7 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
       ibuf[ipos] = ibuf[ipos+2];
       ibuf[ipos+2] = tmp;
       ibuf[ipos+3] = 0xFF - ibuf[ipos+3];
-      ipos += UNIQ_BPP;
+      ipos += UNIQ_bits_per_pixel;
     }
   return (0);
 }
@@ -170,7 +170,7 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
   unsigned char z_out[Z_CHUNK];
 
   b_pos = 0;
-  if (!(buffer = malloc((long long)img->width*(long long)img->height*(long long)pi->bpp + img->height)))
+  if (!(buffer = malloc((long long)img->width*(long long)img->height*(long long)pi->bits_per_pixel + img->height)))
     err(1, "Can't malloc");
   z_strm.zalloc = Z_NULL;
   z_strm.zfree = Z_NULL;
@@ -199,7 +199,7 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
 	      inflateEnd(&z_strm);
 	      return (ERR_ZLIB);
 	    }
-	  if (b_pos + Z_CHUNK - z_strm.avail_out > img->width*img->height*pi->bpp+img->height)
+	  if (b_pos + Z_CHUNK - z_strm.avail_out > img->width*img->height*pi->bits_per_pixel+img->height)
 	    {
 	      inflateEnd(&z_strm);
 	      return (ERR_DATA_MISMATCH);
@@ -210,9 +210,9 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
       dat += len + 4 + 4 + 4;
     } 
   inflateEnd(&z_strm);
-  if (b_pos != img->width*img->height*pi->bpp+img->height)
+  if (b_pos != img->width*img->height*pi->bits_per_pixel+img->height)
     {
-      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
+      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bits_per_pixel+img->height);
       return (ERR_DATA_MISMATCH);
     }
   if ((ret = mipng_fill_img(img, buffer, pi)))
@@ -334,13 +334,13 @@ int	mipng_verif_hdr(unsigned char *hdr, png_info_t *pi)
   if (pi->width <= 0 || pi->height <= 0 || (pi->depth != 8 && pi->depth != 16)
       || (pi->color != 2 && pi->color != 6) || compress != 0 || filter != 0 || pi->interlace != 0)
     return (ERR_STRUCT_INCIMPL);
-  pi->bpp = pi->depth / 8;
+  pi->bits_per_pixel = pi->depth / 8;
   if (pi->color == 2)
-    pi->bpp *= 3;
+    pi->bits_per_pixel *= 3;
   if (pi->color == 6)
-    pi->bpp *= 4;
-  //  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
-  //	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
+    pi->bits_per_pixel *= 4;
+  //  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbits_per_pixel is %d\n",
+  //	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bits_per_pixel);
   return (0);
 }
 

@@ -7,6 +7,7 @@
     "type_traits": "c",
     "sstream": "c",
     "draw_utils.C": "cpp",
-    "raycast_helper.C": "cpp"
+    "raycast_helper.C": "cpp",
+    "libft.h": "c"
   }
 }

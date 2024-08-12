@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/08 12:00:55 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:16:09 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,10 @@ void			select_texture(t_game *cub3d, t_ray_calc *ray_calc,
 					t_texture *texture);
 
 // init
+void			keys(t_game *cub3d);
 void			init_data(t_game *cub3d);
+void			create_image(t_game *cub3d);
+void			begin_execution(t_game *cub3d);
 
 // key_moves
 void			move_player_forward(t_game *game);
@@ -253,5 +256,8 @@ int				free_texture_paths(t_game *cub3d);
 void			check_and_exit(int condition, const char *message,
 					int exit_code);
 int				parse_colour(char *colour, int *hex_colour);
+void			check_plane(t_game *cub3d);
+void			check_files_accessibility(void);
+void			check_player_direction(t_game *cub3d);
 
 #endif

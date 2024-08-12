@@ -6,11 +6,38 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:45:08 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/07/22 16:06:41 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:21:36 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	keys(t_game *cub3d)
+{
+	cub3d->input.up = 0;
+	cub3d->input.down = 0;
+	cub3d->input.left = 0;
+	cub3d->input.right = 0;
+	cub3d->input.turn_left = 0;
+	cub3d->input.turn_right = 0;
+}
+
+void	begin_execution(t_game *cub3d)
+{
+	check_plane(cub3d);
+	check_player_direction(cub3d);
+	create_image(cub3d);
+	keys(cub3d);
+}
+
+void	create_image(t_game *cub3d)
+{
+	cub3d->texture_data.img = mlx_new_image(cub3d->mlx, WIN_WIDTH, WIN_HEIGHT);
+	cub3d->texture_data.address = mlx_get_data_addr(cub3d->texture_data.img,
+			&cub3d->texture_data.bits_per_pixel,
+			&cub3d->texture_data.size_line,
+			&cub3d->texture_data.endian);
+}
 
 void	init_data(t_game *cub3d)
 {

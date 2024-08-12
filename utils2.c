@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:03:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/06 11:35:58 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:33:05 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,73 @@ int	parse_colour(char *colour, int *hex_colour)
 		i++;
 	}
 	return (0);
+}
+
+void	check_plane(t_game *cub3d)
+{
+	if (cub3d->player_initial_pos == 'N')
+	{
+		cub3d->player.view_plane.x_coord = 0.66;
+		cub3d->player.view_plane.y_coord = 0;
+	}
+	if (cub3d->player_initial_pos == 'S')
+	{
+		cub3d->player.view_plane.x_coord = -0.66;
+		cub3d->player.view_plane.y_coord = 0;
+	}
+	if (cub3d->player_initial_pos == 'E')
+	{
+		cub3d->player.view_plane.x_coord = 0;
+		cub3d->player.view_plane.y_coord = 0.66;
+	}
+	if (cub3d->player_initial_pos == 'W')
+	{
+		cub3d->player.view_plane.x_coord = 0;
+		cub3d->player.view_plane.y_coord = -0.66;
+	}
+}
+
+void	check_player_direction(t_game *cub3d)
+{
+	if (cub3d->player_initial_pos == 'N')
+	{
+		cub3d->player.direction.x_coord = 0;
+		cub3d->player.direction.y_coord = -1;
+	}
+	if (cub3d->player_initial_pos == 'S')
+	{
+		cub3d->player.direction.x_coord = 0;
+		cub3d->player.direction.y_coord = 1;
+	}
+	if (cub3d->player_initial_pos == 'E')
+	{
+		cub3d->player.direction.x_coord = 1;
+		cub3d->player.direction.y_coord = 0;
+	}
+	if (cub3d->player_initial_pos == 'W')
+	{
+		cub3d->player.direction.x_coord = -1;
+		cub3d->player.direction.y_coord = 0;
+	}
+}
+
+void	check_files_accessibility(void)
+{
+	const char	*files[] = {
+		"bigger.cub",
+		"brick_wall.xpm"};
+	int			file_count;
+	int			i;
+
+	file_count = 2;
+	i = 0;
+	while (i < file_count)
+	{
+		if (access(files[i], R_OK) != 0)
+		{
+			printf("Error trying to open %s\n", files[i]);
+			exit(1);
+		}
+		i++;
+	}
 }

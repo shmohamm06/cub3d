@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/08 11:59:14 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:22:05 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	main(int ac, char **av)
 	t_game	cub3d;
 
 	args_check(ac);
+	check_files_accessibility();
 	init_data(&cub3d);
 	map(av[1], &cub3d);
 	cub3d.mlx = mlx_init();
 	cub3d.window = mlx_new_window(cub3d.mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
+	begin_execution(&cub3d);
 	mlx_loop(cub3d.mlx);
 }
