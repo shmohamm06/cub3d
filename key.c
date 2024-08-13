@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:53:50 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/08 11:54:56 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:43:28 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	terminate_game(t_game *game)
 	if (game->texture_data.img)
 		mlx_destroy_image(game->mlx, game->texture_data.img);
 	mlx_destroy_window(game->mlx, game->window);
-	printf("Exiting game!\n");
+	printf("GG and thanks for playing :-)\n");
 	exit(0);
 }
 
