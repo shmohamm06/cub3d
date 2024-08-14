@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:10:35 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/01 10:56:36 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:15:26 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,13 @@ int	read_map(char *map, int *x, int *y)
 int	map(char *map, t_game *cub3d)
 {
 	int	fd;
-	int	parser;
 	int	x;
 	int	y;
 
-	if (read_map(map, &x, &y) == -1)
-		exit(1);
+	read_map(map, &x, &y);
 	fd = open_map(map);
-	parser = parse_header(fd, cub3d, 0);
-	if (parser == -1)
-		check_and_exit(-1, "Parsing error\n", 1);
-	parser = parse_map(fd, cub3d, x, y);
+	check_and_exit(parse_header(fd, cub3d, 0), "Parsing error in header\n", 1);
+	check_and_exit(parse_map(fd, cub3d, x, y), "Parsing error in map\n", 1);
 	close(fd);
-	if (parser == -1)
-		check_and_exit(-1, "Parsing error\n", 1);
 	return (check_map(cub3d));
 }
