@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:52:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/06 11:38:21 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:19:25 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	move_player_forward(t_game *game)
 	t_vector	new_pos;
 
 	new_pos.x_coord = game->player.position.x_coord
-		+ game->player.direction.x_coord * 0.1f;
+		+ game->player.direction.x_coord * 0.35f;
 	new_pos.y_coord = game->player.position.y_coord
-		+ game->player.direction.y_coord * 0.1f;
+		+ game->player.direction.y_coord * 0.35f;
 	if (game->map.blocks[(int)game->player.position.y_coord]
 		[(int)new_pos.x_coord] != '1')
 		game->player.position.x_coord = new_pos.x_coord;
@@ -33,9 +33,9 @@ void	move_player_backward(t_game *game)
 	t_vector	new_pos;
 
 	new_pos.x_coord = game->player.position.x_coord
-		- game->player.direction.x_coord * 0.1f;
+		- game->player.direction.x_coord * 0.35f;
 	new_pos.y_coord = game->player.position.y_coord
-		- game->player.direction.y_coord * 0.1f;
+		- game->player.direction.y_coord * 0.35f;
 	if (game->map.blocks[(int)game->player.position.y_coord]
 		[(int)new_pos.x_coord] != '1')
 		game->player.position.x_coord = new_pos.x_coord;
@@ -55,8 +55,8 @@ void	strafe_player_right(t_game *game)
 		- game->player.direction.y_coord * sin(angle);
 	strafe_dir.y_coord = game->player.direction.x_coord * sin(angle)
 		+ game->player.direction.y_coord * cos(angle);
-	new_pos.x_coord = game->player.position.x_coord + strafe_dir.x_coord * 0.1f;
-	new_pos.y_coord = game->player.position.y_coord + strafe_dir.y_coord * 0.1f;
+	new_pos.x_coord = game->player.position.x_coord + strafe_dir.x_coord * 0.35f;
+	new_pos.y_coord = game->player.position.y_coord + strafe_dir.y_coord * 0.35f;
 	if (game->map.blocks[(int)game->player.position.y_coord]
 		[(int)new_pos.x_coord] != '1')
 		game->player.position.x_coord = new_pos.x_coord;
@@ -76,8 +76,8 @@ void	strafe_player_left(t_game *game)
 		- game->player.direction.y_coord * sin(angle);
 	strafe_dir.y_coord = game->player.direction.x_coord * sin(angle)
 		+ game->player.direction.y_coord * cos(angle);
-	new_pos.x_coord = game->player.position.x_coord + strafe_dir.x_coord * 0.1f;
-	new_pos.y_coord = game->player.position.y_coord + strafe_dir.y_coord * 0.1f;
+	new_pos.x_coord = game->player.position.x_coord + strafe_dir.x_coord * 0.35f;
+	new_pos.y_coord = game->player.position.y_coord + strafe_dir.y_coord * 0.35f;
 	if (game->map.blocks[(int)game->player.position.y_coord]
 		[(int)new_pos.x_coord] != '1')
 		game->player.position.x_coord = new_pos.x_coord;

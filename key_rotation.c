@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyhandler.c                                       :+:      :+:    :+:   */
+/*   key_rotation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:54:39 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 10:54:40 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:17:22 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rotate_left(t_game *game)
 	t_vector	new_view_plane;
 	t_vector	new_direction;
 
-	rotation_speed = -0.03f;
+	rotation_speed = -0.1f;
 	new_direction.x_coord = game->player.direction.x_coord * cos(rotation_speed)
 		- game->player.direction.y_coord * sin(rotation_speed);
 	new_direction.y_coord = game->player.direction.x_coord * sin(rotation_speed)
@@ -39,7 +39,7 @@ void	rotate_right(t_game *game)
 	t_vector	new_view_plane;
 	t_vector	new_direction;
 
-	rotation_speed = 0.03f;
+	rotation_speed = 0.1f;
 	new_direction.x_coord = game->player.direction.x_coord * cos(rotation_speed)
 		- game->player.direction.y_coord * sin(rotation_speed);
 	new_direction.y_coord = game->player.direction.x_coord * sin(rotation_speed)
