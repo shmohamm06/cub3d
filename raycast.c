@@ -6,30 +6,30 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:00:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/08 11:57:00 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:08:18 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cast_single_ray(t_game *game, int screen_x)
+void	cast_one_ray(t_game *cub3d, int x, t_texture *texture)
 {
-	t_ray_calc	ray_calc;
+	t_ray_calc	rc;
 
-	initialize_ray_calculation(game, screen_x, &ray_calc);
-	perform_dda(game, &ray_calc);
-	calculate_wall_distance(&ray_calc);
-	render_wall_slice(game, &ray_calc, &game->texture_data);
+	init_racalc(cub3d, x, &rc);
+	check_wall_hit(cub3d, &rc);
+	calculate_distance_to_wall(&rc);
+	render_wall_slice(cub3d, &rc, texture);
 }
 
-void	perform_raycasting(t_game *game)
+void	raycast(t_game *cub3d, t_texture *texture)
 {
-	int	screen_x;
+	int	x;
 
-	screen_x = 0;
-	while (screen_x < WIN_WIDTH)
+	x = 0;
+	while (x < WIN_WIDTH)
 	{
-		cast_single_ray(game, screen_x);
-		screen_x++;
+		cast_one_ray(cub3d, x, texture);
+		x++;
 	}
 }

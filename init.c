@@ -6,21 +6,11 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:45:08 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/13 11:42:08 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:37:58 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	keys(t_game *cub3d)
-{
-	cub3d->input.up = 0;
-	cub3d->input.down = 0;
-	cub3d->input.left = 0;
-	cub3d->input.right = 0;
-	cub3d->input.turn_left = 0;
-	cub3d->input.turn_right = 0;
-}
 
 void	begin_execution(t_game *cub3d)
 {
@@ -31,6 +21,31 @@ void	begin_execution(t_game *cub3d)
 	init_tex(cub3d);
 	check_and_load_textures(cub3d);
 	render_scene(cub3d);
+}
+
+int	render_scene(t_game *cub3d)
+{
+	t_texture	img;
+
+	mlx_clear_window(cub3d->mlx, cub3d->window);
+	setup_hooks(cub3d);
+	clear_image(cub3d);
+	draw_ceiling(cub3d, cub3d->ceiling_col);
+	draw_floor(cub3d, cub3d->floor_color);
+	raycast(cub3d, &img);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->window, cub3d->texture_data.img,
+		0, 0);
+	return (0);
+}
+
+void	keys(t_game *cub3d)
+{
+	cub3d->input.up = 0;
+	cub3d->input.down = 0;
+	cub3d->input.left = 0;
+	cub3d->input.right = 0;
+	cub3d->input.turn_left = 0;
+	cub3d->input.turn_right = 0;
 }
 
 void	create_image(t_game *cub3d)

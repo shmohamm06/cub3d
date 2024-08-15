@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:46:58 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 16:21:23 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:30:05 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_ceiling(t_game *game, int color)
 		0);
 }
 
-void	draw_floor(t_game *game, int color)
+void	draw_floor(t_game *cub3d, int color)
 {
 	int	y;
 	int	x;
@@ -51,17 +51,14 @@ void	draw_floor(t_game *game, int color)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
-		{
-			my_mlx_pixel_put(&game->texture_data, x, y, color);
-			x++;
-		}
+			my_mlx_pixel_put(&cub3d->texture_data, x++, y, color);
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx, game->window, game->texture_data.img, 0,
-		0);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->window, cub3d->texture_data.img,
+		0, 0);
 }
 
-void	clear_image(t_game *game)
+void	clear_image(t_game *cub3d)
 {
 	int	y;
 	int	x;
@@ -71,14 +68,11 @@ void	clear_image(t_game *game)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
-		{
-			my_mlx_pixel_put(&game->texture_data, x, y, 0x000000);
-			x++;
-		}
-		y++;
+			my_mlx_pixel_put(&cub3d->texture_data, x++, y, 0);
+		++y;
 	}
-	mlx_put_image_to_window(game->mlx, game->window, game->texture_data.img, 0,
-		0);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->window, cub3d->texture_data.img,
+		0x000000, 0);
 }
 
 int	get_image_pixel(t_texture *texture, int x, int y)

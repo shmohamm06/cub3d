@@ -6,24 +6,11 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:17:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/13 11:55:17 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:14:02 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	render_scene(t_game *cub3d)
-{
-	mlx_clear_window(cub3d->mlx, cub3d->window);
-	setup_hooks(cub3d);
-	clear_image(cub3d);
-	draw_ceiling(cub3d, cub3d->ceiling_col);
-	draw_floor(cub3d, cub3d->floor_color);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->window, cub3d->texture_data.img,
-		0, 0);
-	return (0);
-}
-// raycast(game, game->textures);
 
 void	setup_hooks(t_game *cub3d)
 {

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:52:27 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/08 11:57:36 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:08:54 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	render_wall_slice(t_game *game, t_ray_calc *ray_calc,
 	int			color;
 	int			texture_y;
 
-	select_texture(game, ray_calc, texture);
+	pick_texture(game, ray_calc, texture);
 	calculate_wall_dimensions(game, ray_calc, &wall_draw, texture);
 	texture->texture_x = (int)(wall_draw.wall_hit_x
 			* (float)texture->img_width);
@@ -59,23 +59,5 @@ void	render_wall_slice(t_game *game, t_ray_calc *ray_calc,
 		my_mlx_pixel_put(&game->texture_data, ray_calc->screen_x, y, color);
 		wall_draw.texture_position += wall_draw.texture_step;
 		y++;
-	}
-}
-
-void	select_texture(t_game *cub3d, t_ray_calc *ray_calc, t_texture *texture)
-{
-	if (ray_calc->hit_side == 0)
-	{
-		if (ray_calc->ray_dir.x_coord > 0)
-			*texture = cub3d->textures[EAST];
-		else
-			*texture = cub3d->textures[WEST];
-	}
-	else
-	{
-		if (ray_calc->ray_dir.y_coord > 0)
-			*texture = cub3d->textures[SOUTH];
-		else
-			*texture = cub3d->textures[NORTH];
 	}
 }

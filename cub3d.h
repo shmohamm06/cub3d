@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 19:26:03 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:06:39 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ typedef struct s_game
 # define ON_MOUSE_DW 4
 
 // cub3d
-int				render_scene(t_game *game);
 void			setup_hooks(t_game *game);
 
 // check_files
@@ -175,14 +174,13 @@ void			calculate_wall_dimensions(t_game *game, t_ray_calc *ray_calc,
 					t_wall_draw *wall_draw, t_texture *texture);
 void			render_wall_slice(t_game *game, t_ray_calc *ray_calc,
 					t_texture *texture);
-void			select_texture(t_game *cub3d, t_ray_calc *ray_calc,
-					t_texture *texture);
 
 // init
-void			keys(t_game *cub3d);
-void			init_data(t_game *cub3d);
-void			create_image(t_game *cub3d);
 void			begin_execution(t_game *cub3d);
+int				render_scene(t_game *cub3d);
+void			init_data(t_game *cub3d);
+void			keys(t_game *cub3d);
+void			create_image(t_game *cub3d);
 
 // key_moves
 void			move_player_forward(t_game *game);
@@ -219,23 +217,21 @@ int				parse_map_header(t_game *cub3d, char **spl, bool *floor,
 int				parse_header(int fd, t_game *cub3d, int flag);
 
 // ray_calculation
-t_vector		calculate_ray_direction(t_gamer *player, float camera_plane_x);
+t_vector		calculate_ray_direction(t_game *cub3d, float camera_x);
 t_vector		calculate_delta_distance(t_vector *ray_direction);
-t_vector		calculate_step_direction(t_vector *ray_direction);
-t_vector		calculate_initial_side_distance(t_gamer *player,
-					t_vector *ray_direction,
-					t_vector *grid_pos,
-					t_vector *delta_distance);
+t_vector		calculate_step(t_vector *ray_direction);
+t_vector		calcsid(t_game *cub3d, t_vector *rayd, t_vector *map,
+					t_vector *deltd);
 
 // raycast_help
-void			perform_dda(t_game *game, t_ray_calc *ray_calc);
-void			initialize_ray_calculation(t_game *game, int screen_x,
-					t_ray_calc *ray_calc);
-void			calculate_wall_distance(t_ray_calc *ray_calc);
-
+void			check_wall_hit(t_game *cub3d, t_ray_calc *rc);
+void			init_racalc(t_game *cub3d, int x, t_ray_calc *rc);
+void			pick_texture(t_game *cub3d, t_ray_calc *ray_calc,
+					t_texture *texture);
+void			calculate_distance_to_wall(t_ray_calc *ray_calc);
 // raycast
-void			cast_single_ray(t_game *game, int screen_x);
-void			perform_raycasting(t_game *game);
+void			cast_one_ray(t_game *cub3d, int x, t_texture *texture);
+void			raycast(t_game *cub3d, t_texture *texture);
 
 // textures
 void			check_xpms(t_game *cub3d, t_texture *tex, char *texture_path);
@@ -245,8 +241,8 @@ void			fill_walls(t_game *cub3d, t_texture *tex, char *path);
 void			check_and_load_textures(t_game *cub3d);
 
 // utils_draw
-void			my_mlx_pixel_put(t_texture *image_data, int x,
-					int y, int color);
+void			my_mlx_pixel_put(t_texture *image_data, int x, int y,
+					int color);
 void			draw_ceiling(t_game *game, int color);
 void			draw_floor(t_game *game, int color);
 void			clear_image(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:03:49 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 18:33:05 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:35:11 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,14 @@ void	check_files_accessibility(void)
 {
 	const char	*files[] = {
 		"bigger.cub",
-		"brick_wall.xpm"};
+		"brick_wall.xpm",
+		"brick_wall_cracked.xpm",
+		"dehydrated_earth.xpm",
+		"dirty_mossy_tiles.xpm"};
 	int			file_count;
 	int			i;
 
-	file_count = 2;
+	file_count = 5;
 	i = 0;
 	while (i < file_count)
 	{

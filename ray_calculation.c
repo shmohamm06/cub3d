@@ -6,73 +6,64 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:55:21 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/05 14:19:20 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:55:33 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_vector	calculate_ray_direction(t_gamer *player, float camera_plane_x)
+t_vector	calculate_ray_direction(t_game *cub3d, float camera_x)
 {
 	t_vector	ray_direction;
 
-	ray_direction.x_coord = player->direction.x_coord
-		+ player->view_plane.x_coord * camera_plane_x;
-	ray_direction.y_coord = player->direction.y_coord
-		+ player->view_plane.y_coord * camera_plane_x;
+	ray_direction.x_coord = cub3d->player.direction.x_coord
+		+ cub3d->player.view_plane.x_coord * camera_x;
+	ray_direction.y_coord = cub3d->player.direction.y_coord
+		+ cub3d->player.view_plane.y_coord * camera_x;
 	return (ray_direction);
 }
 
+// length of ray from one x or y-side to next x or y-side
 t_vector	calculate_delta_distance(t_vector *ray_direction)
 {
-	t_vector	delta_distance;
+	t_vector	delta_dist;
 
-	delta_distance.x_coord = fabs(1.0 / ray_direction->x_coord);
-	delta_distance.y_coord = fabs(1.0 / ray_direction->y_coord);
-	return (delta_distance);
+	delta_dist.x_coord = fabs(1. / ray_direction->x_coord);
+	delta_dist.y_coord = fabs(1. / ray_direction->y_coord);
+	return (delta_dist);
 }
 
-t_vector	calculate_step_direction(t_vector *ray_direction)
+t_vector	calculate_step(t_vector *ray_direction)
 {
-	t_vector	step_direction;
+	t_vector	step;
 
 	if (ray_direction->x_coord < 0)
-		step_direction.x_coord = -1;
+		step.x_coord = -1;
 	else
-		step_direction.x_coord = 1;
+		step.x_coord = 1;
 	if (ray_direction->y_coord < 0)
-		step_direction.y_coord = -1;
+		step.y_coord = -1;
 	else
-		step_direction.y_coord = 1;
-	return (step_direction);
+		step.y_coord = 1;
+	return (step);
 }
 
-t_vector	calculate_initial_side_distance(t_gamer *player,
-											t_vector *ray_direction,
-											t_vector *grid_pos,
-											t_vector *delta_distance)
+t_vector	calcsid(t_game *cub3d, t_vector *rayd, t_vector *map,
+		t_vector *deltd)
 {
-	t_vector	side_distance;
+	t_vector	side_dist;
 
-	if (ray_direction->x_coord < 0)
-	{
-		side_distance.x_coord = (player->position.x_coord - grid_pos->x_coord)
-			* delta_distance->x_coord;
-	}
+	if (rayd->x_coord < 0)
+		side_dist.x_coord = (cub3d->player.position.x_coord - map->x_coord)
+			* deltd->x_coord;
 	else
-	{
-		side_distance.x_coord = (grid_pos->x_coord + 1.0
-				- player->position.x_coord) * delta_distance->x_coord;
-	}
-	if (ray_direction->y_coord < 0)
-	{
-		side_distance.y_coord = (player->position.y_coord - grid_pos->y_coord)
-			* delta_distance->y_coord;
-	}
+		side_dist.x_coord = (map->x_coord + 1.0
+				- cub3d->player.position.x_coord) * deltd->x_coord;
+	if (rayd->y_coord < 0)
+		side_dist.y_coord = (cub3d->player.position.y_coord - map->y_coord)
+			* deltd->y_coord;
 	else
-	{
-		side_distance.y_coord = (grid_pos->y_coord + 1.0
-				- player->position.y_coord) * delta_distance->y_coord;
-	}
-	return (side_distance);
+		side_dist.y_coord = (map->y_coord + 1.0
+				- cub3d->player.position.y_coord) * deltd->y_coord;
+	return (side_dist);
 }
