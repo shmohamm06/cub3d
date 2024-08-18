@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:23:41 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 19:34:48 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:43:57 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,5 @@ int	check_map(t_game *cub3d)
 		1);
 	check_and_exit(check_inside_map(cub3d), "Invalid Map structure\n", 1);
 	check_and_exit(check_all_textures(cub3d), "Invalid Map structure\n", 1);
-	check_xpms(cub3d, &cub3d->textures[NORTH], cub3d->texture_paths.north);
-	check_xpms(cub3d, &cub3d->textures[SOUTH], cub3d->texture_paths.south);
-	check_xpms(cub3d, &cub3d->textures[EAST], cub3d->texture_paths.west);
-	check_xpms(cub3d, &cub3d->textures[WEST], cub3d->texture_paths.east);
 	return (0);
 }

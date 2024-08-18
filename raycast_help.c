@@ -6,13 +6,13 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:58:44 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/15 14:15:34 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:19:30 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_wall_hit(t_game *cub3d, t_ray_calc *rc)
+void	perform_dda(t_game *cub3d, t_ray_calc *rc)
 {
 	bool	hit;
 
@@ -38,7 +38,7 @@ void	check_wall_hit(t_game *cub3d, t_ray_calc *rc)
 	}
 }
 
-void	init_racalc(t_game *cub3d, int x, t_ray_calc *rc)
+void	init_calc(t_game *cub3d, int x, t_ray_calc *rc)
 {
 	rc->screen_x = x;
 	rc->camera_plane_x = 2 * rc->screen_x / (float)WIN_WIDTH - 1;

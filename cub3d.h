@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/15 14:06:39 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:44:16 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,8 @@ t_vector		calcsid(t_game *cub3d, t_vector *rayd, t_vector *map,
 					t_vector *deltd);
 
 // raycast_help
-void			check_wall_hit(t_game *cub3d, t_ray_calc *rc);
-void			init_racalc(t_game *cub3d, int x, t_ray_calc *rc);
+void			perform_dda(t_game *cub3d, t_ray_calc *rc);
+void			init_calc(t_game *cub3d, int x, t_ray_calc *rc);
 void			pick_texture(t_game *cub3d, t_ray_calc *ray_calc,
 					t_texture *texture);
 void			calculate_distance_to_wall(t_ray_calc *ray_calc);
@@ -234,7 +234,6 @@ void			cast_one_ray(t_game *cub3d, int x, t_texture *texture);
 void			raycast(t_game *cub3d, t_texture *texture);
 
 // textures
-void			check_xpms(t_game *cub3d, t_texture *tex, char *texture_path);
 void			init_tex(t_game *cub3d);
 void			init_tex_values(t_texture *texture);
 void			fill_walls(t_game *cub3d, t_texture *tex, char *path);

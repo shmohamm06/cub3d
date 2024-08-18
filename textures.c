@@ -6,24 +6,11 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:54:14 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/12 19:34:10 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:47:28 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	check_xpms(t_game *cub3d, t_texture *tex, char *texture_path)
-{
-	void	*image;
-
-	image = mlx_xpm_file_to_image(cub3d->mlx, texture_path, &tex->img_width,
-			&tex->img_height);
-	if (image == NULL)
-	{
-		printf("Error trying to open %s\n", texture_path);
-		exit(1);
-	}
-}
 
 void	init_tex(t_game *cub3d)
 {
@@ -52,7 +39,7 @@ void	fill_walls(t_game *cub3d, t_texture *tex, char *path)
 			&tex->img_height);
 	if (!tex->img)
 	{
-		printf("texture mlx to image failed");
+		printf("Error trying to convert %s\n", path);
 		return ;
 	}
 	tex->address = mlx_get_data_addr(tex->img, &tex->bits_per_pixel,
