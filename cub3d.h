@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: shmohamm <shmohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:18:00 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/18 15:44:16 by shmohamm         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:06:07 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void			init_tex(t_game *cub3d);
 void			init_tex_values(t_texture *texture);
 void			fill_walls(t_game *cub3d, t_texture *tex, char *path);
 void			check_and_load_textures(t_game *cub3d);
+bool			check_texture_conversion(t_game *cub3d);
 
 // utils_draw
 void			my_mlx_pixel_put(t_texture *image_data, int x, int y,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: shmohamm <shmohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:44:40 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/08/06 11:42:19 by shmohamm         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:06:22 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ bool	check_all_textures(t_game *cub3d)
 		return (false);
 	if (check_file_type(cub3d->texture_paths.west) == false)
 		return (false);
+	if (check_texture_conversion(cub3d) == false)
+		return (false);
 	return (true);
 }
+
 
 int	valid_file_path(char *path)
 {
